@@ -13,6 +13,77 @@
 7.	To reach a variable, enter the variable to be searched and the symbol table has been checked for the corresponding variable, the variable along with its address is displayed as a result.
 8.	Stop the program. 
 # PROGRAM
+```
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MAX_EXPRESSION_SIZE 100
+
+int main() {
+	int i = 0, j = 0, x = 0, n, flag = 0;
+	int k;
+	char b[MAX_EXPRESSION_SIZE], d[15], c, srch;
+
+	printf("Enter the Expression terminated by $: ");
+	while ((c = getchar()) != '$' && i < MAX_EXPRESSION_SIZE - 1) {
+		b[i++] = c;
+	}
+	b[i] = '\0';
+	n = i - 1;
+
+	printf("\nGiven Expression: %s\n", b);
+
+	printf("\nSymbol Table\n");
+	printf("Symbol\tType\t\tAddress\n");
+
+	for (j = 0; j <= n; j++) {
+		c = b[j];
+		if (isalpha((unsigned char)c)) {
+			int alreadyExists = 0;
+			for (k = 0; k < x; k++) {
+				if (d[k] == c) {
+					alreadyExists = 1;
+					break;
+				}
+			}
+
+			if (!alreadyExists) {
+				d[x] = c;
+				printf("%c\tidentifier\t%p\n", c, (void*)&d[x]);
+				x++;
+			}
+		}
+	}
+
+	// Clear input buffer
+	while ((c = getchar()) != '\n' && c != EOF);
+
+	printf("\nEnter the symbol to search: ");
+	srch = getchar();
+
+	for (i = 0; i < x; i++) {
+		if (srch == d[i]) {
+			printf("Symbol Found\n");
+			flag = 1;
+			break;
+		}
+	}
+	if (flag == 0)
+		printf("Symbol Not Found\n");
+
+	return 0;
+}
+
+```
 # OUTPUT
+## Symbol Found
+<img width="1915" height="1079" alt="Screenshot 2026-02-03 103000" src="https://github.com/user-attachments/assets/d3a8a042-838b-4af9-8ed8-88b864a3b9f6" />
+
+## Symbol Not Found
+<img width="1919" height="1079" alt="Screenshot 2026-02-03 103109" src="https://github.com/user-attachments/assets/0b5c9ff3-e7ba-4326-aeeb-077a6c77a2dd" />
+
+
 # RESULT
 ### The program to implement a symbol table is executed and the output is verified.
